@@ -30,10 +30,19 @@ export interface LLMMetrics {
 // Mock データ生成（将来: OpenClaw sessions_list ツール経由で取得）
 // TODO: sessions_listツールでリアルデータを取得
 export function fetchLLMTraces(limit: number = 50): LLMTrace[] {
+  // ✅ 実環境に合わせたモデル選択（main: Sonnet, worker: Opus）
+  // Sonnet 70%, Opus 30% の比率
   const models = [
     'anthropic/claude-sonnet-4-5',
+    'anthropic/claude-sonnet-4-5',
+    'anthropic/claude-sonnet-4-5',
+    'anthropic/claude-sonnet-4-5',
+    'anthropic/claude-sonnet-4-5',
+    'anthropic/claude-sonnet-4-5',
+    'anthropic/claude-sonnet-4-5',
     'anthropic/claude-opus-4-5',
-    'anthropic/claude-haiku-4-5',
+    'anthropic/claude-opus-4-5',
+    'anthropic/claude-opus-4-5',
   ];
 
   const traces: LLMTrace[] = [];
