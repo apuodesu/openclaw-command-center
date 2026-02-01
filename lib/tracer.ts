@@ -39,7 +39,8 @@ export function calculateCost(model: string, inputTokens: number, outputTokens: 
   return (inputTokens / 1_000_000) * costs.input + (outputTokens / 1_000_000) * costs.output;
 }
 
-// Mock データ生成（実際はログファイル or API）
+// Mock データ生成（将来: OpenClaw sessions_list ツール経由で取得）
+// TODO: sessions_listツールでリアルデータを取得
 export function fetchLLMTraces(limit: number = 50): LLMTrace[] {
   const models = [
     'anthropic/claude-sonnet-4-5',
@@ -57,21 +58,23 @@ export function fetchLLMTraces(limit: number = 50): LLMTrace[] {
     const totalTokens = inputTokens + outputTokens;
     const latencyMs = Math.floor(Math.random() * 3000) + 500;
     const cost = calculateCost(model, inputTokens, outputTokens);
-    const status = Math.random() > 0.95 ? 'error' : 'success';
+    
+    // ✅ エラー生成削除（実際のエラーのみ表示）
+    const status = 'success';
 
     traces.push({
       id: `trace-${i}`,
       timestamp: new Date(now - i * 60000), // 1分ごと
       model,
       prompt: 'User request...',
-      response: status === 'success' ? 'AI response...' : '',
+      response: 'AI response...',
       inputTokens,
       outputTokens,
       totalTokens,
       latencyMs,
       cost,
       status,
-      error: status === 'error' ? 'Rate limit exceeded' : undefined,
+      error: undefined,
     });
   }
 
