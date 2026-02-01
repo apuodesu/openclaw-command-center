@@ -6,8 +6,9 @@ import { MemoryCard } from '@/components/MemoryCard';
 import { TaskCard } from '@/components/TaskCard';
 import { DeployCard } from '@/components/DeployCard';
 import { LLMMetricsCard } from '@/components/LLMMetricsCard';
-import { TraceHistoryCard } from '@/components/TraceHistoryCard';
-import { ActivityChartCard } from '@/components/ActivityChartCard';
+// Mockデータコンポーネント削除
+// import { TraceHistoryCard } from '@/components/TraceHistoryCard';
+// import { ActivityChartCard } from '@/components/ActivityChartCard';
 
 export default function CommandCenter() {
   const [lastUpdate, setLastUpdate] = useState(new Date());
@@ -40,8 +41,9 @@ export default function CommandCenter() {
           <LLMMetricsCard />
           <TaskCard />
           <DeployCard />
-          <ActivityChartCard />
-          <TraceHistoryCard />
+          {/* Mockデータコンポーネント削除 */}
+          {/* <ActivityChartCard /> */}
+          {/* <TraceHistoryCard /> */}
         </div>
 
         {/* Footer */}

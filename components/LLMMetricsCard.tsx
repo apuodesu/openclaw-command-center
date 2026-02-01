@@ -1,16 +1,31 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { fetchLLMTraces, calculateMetrics, type LLMMetrics } from '@/lib/tracer';
+
+interface LLMMetrics {
+  totalCalls: number;
+  totalTokens: number;
+  averageLatency: number;
+  errorRate: number;
+  callsPerHour: number;
+}
 
 export function LLMMetricsCard() {
   const [metrics, setMetrics] = useState<LLMMetrics | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const updateMetrics = () => {
-      const traces = fetchLLMTraces(100);
-      const m = calculateMetrics(traces);
-      setMetrics(m);
+    const updateMetrics = async () => {
+      try {
+        const res = await fetch('/api/metrics');
+        if (!res.ok) throw new Error('Failed to fetch metrics');
+        const data = await res.json();
+        setMetrics(data);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to fetch metrics:', err);
+        setError('Failed to load metrics');
+      }
     };
 
     updateMetrics();
@@ -19,12 +34,28 @@ export function LLMMetricsCard() {
     return () => clearInterval(interval);
   }, []);
 
+  if (error) {
+    return (
+      <div className="bg-slate-800/50 backdrop-blur border border-red-700 rounded-xl p-6 flex items-center justify-center h-48">
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-red-400 text-sm">⚠️ {error}</p>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="mt-2 px-4 py-2 bg-red-500/20 text-red-400 rounded-lg hover:bg-red-500/30 transition-colors"
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   if (!metrics) {
     return (
       <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 flex items-center justify-center h-48">
         <div className="flex flex-col items-center gap-2">
           <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-slate-400 text-sm">Loading metrics...</p>
+          <p className="text-slate-400 text-sm">Loading real metrics...</p>
         </div>
       </div>
     );
