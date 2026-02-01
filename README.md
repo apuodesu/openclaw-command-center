@@ -1,36 +1,102 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🦞 OpenClaw Command Center
 
-## Getting Started
+AI assistant management dashboard for monitoring OpenClaw operations in real-time.
 
-First, run the development server:
+## 🌐 Live Demo
+
+**Production:** https://openclaw-command-center-ashy.vercel.app
+
+## 📊 Features
+
+### Core Monitoring
+- **Session Status**: Token usage, main/worker agent health
+- **Memory Monitoring**: Work log update tracking, 30m/1h alerts
+- **Task Management**: TODO tracking, priority-based filtering
+- **Deployment Status**: Vercel/GitHub integration, deployment history
+
+### LLM Metrics (Langfuse不要)
+- **Real-time Metrics**: Total calls, average latency, token consumption
+- **Trace History**: Last 20 LLM calls with model breakdown
+- **Activity Chart**: 2-hour timeline of API calls and token usage
+- **Performance Analysis**: Latency categorization (Fast/Normal/Slow)
+
+### UI/UX
+- ✨ Dark mode optimized
+- 📱 Fully responsive (mobile-first)
+- 🔄 Auto-refresh every 30s
+- 🎨 Status badges (🟢 Success / 🟡 Warning / 🔴 Error)
+- 🎯 Card-based layout
+
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 16 (App Router + Turbopack)
+- **Styling**: Tailwind CSS 4
+- **Language**: TypeScript (strict mode)
+- **Deployment**: Vercel
+- **PWA**: Manifest + Service Worker ready
+
+## 📦 Installation
 
 ```bash
+# Clone repository
+git clone https://github.com/apuodesu/openclaw-command-center.git
+cd openclaw-command-center
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Currently uses mock data for demonstration. To integrate with real OpenClaw data:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Enable OpenClaw Tools** (Future implementation)
+   - `sessions_list`: Fetch active sessions
+   - `session_status`: Get token usage
+   - `sessions_history`: Retrieve conversation history
 
-## Learn More
+2. **Update `lib/tracer.ts`**
+   - Replace `fetchLLMTraces()` mock with real API calls
 
-To learn more about Next.js, take a look at the following resources:
+See [OpenClaw Documentation](https://docs.openclaw.ai) for API reference.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📝 Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+No environment variables required for the current version (uses mock data).
 
-## Deploy on Vercel
+## 🎯 Roadmap
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [ ] Real-time OpenClaw session integration via `sessions_list` tool
+- [ ] WebSocket live updates (replace 30s polling)
+- [ ] Historical data persistence (last 7 days)
+- [ ] Custom alert thresholds
+- [ ] Export reports (CSV/JSON)
+- [ ] Multi-agent comparison view
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🤝 Contributing
+
+PRs welcome! Please ensure:
+- TypeScript strict mode compliance
+- Tailwind CSS for styling (no inline styles)
+- Mobile-first responsive design
+- Dark mode compatibility
+
+## 📄 License
+
+MIT
+
+## 🔗 Links
+
+- **GitHub**: https://github.com/apuodesu/openclaw-command-center
+- **OpenClaw Docs**: https://docs.openclaw.ai
+- **Vercel Deployment**: https://openclaw-command-center-ashy.vercel.app
+
+---
+
+Built with ❤️ for the OpenClaw community | 🚫 Langfuse不要

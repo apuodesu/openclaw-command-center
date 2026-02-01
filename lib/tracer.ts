@@ -25,19 +25,7 @@ export interface LLMMetrics {
   callsPerHour: number;
 }
 
-// モデル別コスト（USD per 1M tokens）
-const MODEL_COSTS: Record<string, { input: number; output: number }> = {
-  'anthropic/claude-sonnet-4-5': { input: 3.0, output: 15.0 },
-  'anthropic/claude-opus-4-5': { input: 15.0, output: 75.0 },
-  'anthropic/claude-haiku-4-5': { input: 1.0, output: 5.0 },
-  'fireworks/kimi-k2p5': { input: 1.5, output: 1.5 },
-};
-
-// コスト計算
-export function calculateCost(model: string, inputTokens: number, outputTokens: number): number {
-  const costs = MODEL_COSTS[model] || { input: 3.0, output: 15.0 }; // デフォルト: Sonnet
-  return (inputTokens / 1_000_000) * costs.input + (outputTokens / 1_000_000) * costs.output;
-}
+// コスト計算は不要（Claude Code定額制のため削除）
 
 // Mock データ生成（将来: OpenClaw sessions_list ツール経由で取得）
 // TODO: sessions_listツールでリアルデータを取得
@@ -57,9 +45,6 @@ export function fetchLLMTraces(limit: number = 50): LLMTrace[] {
     const outputTokens = Math.floor(Math.random() * 2000) + 200;
     const totalTokens = inputTokens + outputTokens;
     const latencyMs = Math.floor(Math.random() * 3000) + 500;
-    const cost = calculateCost(model, inputTokens, outputTokens);
-    
-    // ✅ エラー生成削除（実際のエラーのみ表示）
     const status = 'success';
 
     traces.push({
@@ -72,7 +57,7 @@ export function fetchLLMTraces(limit: number = 50): LLMTrace[] {
       outputTokens,
       totalTokens,
       latencyMs,
-      cost,
+      cost: 0, // 定額制のため常に0
       status,
       error: undefined,
     });

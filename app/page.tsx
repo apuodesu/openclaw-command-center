@@ -7,7 +7,7 @@ import { TaskCard } from '@/components/TaskCard';
 import { DeployCard } from '@/components/DeployCard';
 import { LLMMetricsCard } from '@/components/LLMMetricsCard';
 import { TraceHistoryCard } from '@/components/TraceHistoryCard';
-import { CostChartCard } from '@/components/CostChartCard';
+import { ActivityChartCard } from '@/components/ActivityChartCard';
 
 export default function CommandCenter() {
   const [lastUpdate, setLastUpdate] = useState(new Date());
@@ -40,13 +40,32 @@ export default function CommandCenter() {
           <LLMMetricsCard />
           <TaskCard />
           <DeployCard />
-          <CostChartCard />
+          <ActivityChartCard />
           <TraceHistoryCard />
         </div>
 
         {/* Footer */}
-        <footer className="mt-8 text-center text-slate-500 text-sm">
+        <footer className="mt-8 text-center text-slate-500 text-sm space-y-2">
           <p>OpenClaw v2026.1.29 | Auto-refresh: 30s | 🚫 Langfuse不要</p>
+          <p>
+            <a 
+              href="https://github.com/apuodesu/openclaw-command-center" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              GitHub
+            </a>
+            {' · '}
+            <a 
+              href="https://docs.openclaw.ai" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-cyan-400 hover:text-cyan-300 transition-colors"
+            >
+              OpenClaw Docs
+            </a>
+          </p>
         </footer>
       </div>
     </main>

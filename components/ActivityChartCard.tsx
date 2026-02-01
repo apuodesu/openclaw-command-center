@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { fetchLLMTraces, getTimeSeriesData, type TimeSeriesData } from '@/lib/tracer';
 
-export function CostChartCard() {
+export function ActivityChartCard() {
   const [data, setData] = useState<TimeSeriesData[]>([]);
 
   useEffect(() => {
@@ -19,7 +19,16 @@ export function CostChartCard() {
     return () => clearInterval(interval);
   }, []);
 
-  if (data.length === 0) return <div>Loading...</div>;
+  if (data.length === 0) {
+    return (
+      <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all col-span-full flex items-center justify-center h-64">
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-slate-400 text-sm">Loading activity data...</p>
+        </div>
+      </div>
+    );
+  }
 
   const maxTokens = Math.max(...data.map(d => d.tokens), 1);
   const maxCalls = Math.max(...data.map(d => d.calls), 1);

@@ -19,7 +19,16 @@ export function LLMMetricsCard() {
     return () => clearInterval(interval);
   }, []);
 
-  if (!metrics) return <div>Loading...</div>;
+  if (!metrics) {
+    return (
+      <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 flex items-center justify-center h-48">
+        <div className="flex flex-col items-center gap-2">
+          <div className="w-8 h-8 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+          <p className="text-slate-400 text-sm">Loading metrics...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="bg-slate-800/50 backdrop-blur border border-slate-700 rounded-xl p-6 hover:border-cyan-500/50 transition-all">
