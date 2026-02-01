@@ -5,6 +5,9 @@ import { SessionCard } from '@/components/SessionCard';
 import { MemoryCard } from '@/components/MemoryCard';
 import { TaskCard } from '@/components/TaskCard';
 import { DeployCard } from '@/components/DeployCard';
+import { LLMMetricsCard } from '@/components/LLMMetricsCard';
+import { TraceHistoryCard } from '@/components/TraceHistoryCard';
+import { CostChartCard } from '@/components/CostChartCard';
 
 export default function CommandCenter() {
   const [lastUpdate, setLastUpdate] = useState(new Date());
@@ -34,13 +37,16 @@ export default function CommandCenter() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <SessionCard />
           <MemoryCard />
+          <LLMMetricsCard />
           <TaskCard />
           <DeployCard />
+          <CostChartCard />
+          <TraceHistoryCard />
         </div>
 
         {/* Footer */}
         <footer className="mt-8 text-center text-slate-500 text-sm">
-          <p>OpenClaw v2026.1.29 | Auto-refresh: 30s</p>
+          <p>OpenClaw v2026.1.29 | Auto-refresh: 30s | 🚫 Langfuse不要</p>
         </footer>
       </div>
     </main>
