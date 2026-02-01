@@ -92,7 +92,6 @@ export function TraceHistoryCard() {
                 <div className="flex gap-4 text-xs text-slate-400">
                   <span>🎯 {trace.totalTokens.toLocaleString()} tokens</span>
                   <span>⏱️ {trace.latencyMs}ms</span>
-                  <span>💰 ${trace.cost.toFixed(4)}</span>
                 </div>
               </div>
             </div>

@@ -45,16 +45,10 @@ export function LLMMetricsCard() {
           </p>
         </div>
 
-        <div className="p-4 bg-slate-700/30 rounded-lg border border-slate-600">
-          <p className="text-slate-400 text-sm mb-1">Total Tokens</p>
+        <div className="p-4 bg-slate-700/30 rounded-lg border border-slate-600 col-span-2">
+          <p className="text-slate-400 text-sm mb-1">Total Tokens (Last 100 calls)</p>
           <p className="text-2xl font-bold text-cyan-400">{(metrics.totalTokens / 1000).toFixed(1)}K</p>
           <p className="text-xs text-slate-500 mt-1">Input + Output</p>
-        </div>
-
-        <div className="p-4 bg-slate-700/30 rounded-lg border border-slate-600">
-          <p className="text-slate-400 text-sm mb-1">Total Cost</p>
-          <p className="text-2xl font-bold text-green-400">${metrics.totalCost.toFixed(3)}</p>
-          <p className="text-xs text-slate-500 mt-1">Last 100 calls</p>
         </div>
       </div>
 
